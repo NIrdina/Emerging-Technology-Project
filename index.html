@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Conferencing App</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <header>
+            <img src="{{ url_for('static', filename='logo.gif') }}" alt="Logo" id="logo">
+            <h1>Welcome to the FCOM Conferencing App</h1>
+        </header>
+
+        <!-- Create Room Section -->
+        <div id="createMeeting">
+            <button id="createRoomButton">Create Room</button>
+            <p id="roomLink" style="display: none; margin-top: 10px; color: green;">Room created! Share this link: <span id="roomUrl"></span></p>
+        </div>
+
+        <!-- Join Meeting Section -->
+        <div id="joinMeeting">
+            <input type="text" id="roomName" placeholder="Enter Room Name" required>
+            <input type="text" id="displayName" placeholder="Enter Your Name" required>
+            <button id="joinButton">Join Meeting</button>
+        </div>
+
+        <!-- Controls -->
+        <div id="controls" style="display:none;">
+            <button id="endCall">❌ End Call</button>
+            <span id="meetingTimer">Time: 00:00</span>
+            <a href="{{ url_for('logout') }}" id="logoutLink">
+                <button>Logout</button>
+            </a>
+        </div>
+
+        <!-- Meeting Container -->
+        <div id="meet"></div>
+        <div id="status"></div>
+
+        <script src="https://meet.jit.si/external_api.js"></script>
+        <script>
+            let api = null;
+            let meetingStartTime = null;
+            let timerInterval = null;
+
+            // Create Room
+            document.getElementById('createRoomButton').addEventListener('click', () => {
+                const roomName = `room-${Math.random().toString(36).substr(2, 8)}`; // Generate a random room name
+                const roomUrl = `https://meet.jit.si/${roomName}`;
+                document.getElementById('roomUrl').textContent = roomUrl;
+                document.getElementById('roomLink').style.display = 'block';
+                alert(`Room created! Share this link: ${roomUrl}`);
+            });
+
+            // Join Meeting
+            document.getElementById('joinButton').addEventListener('click', () => {
+                const roomName = document.getElementById('roomName').value.trim();
+                const displayName = document.getElementById('displayName').value.trim();
+
+                if (!roomName || !displayName) {
+                    alert("Please enter both a room name and your name.");
+                    return;
+                }
+
+                // Show loading status while the meeting is being initialized
+                document.getElementById('status').innerText = "Joining the meeting... Please wait.";
+
+                // Initialize Jitsi Meet API
+                const domain = "meet.jit.si";
+                const options = {
+                    roomName: roomName,
+                    width: "100%",
+                    height: 500,
+                    parentNode: document.querySelector('#meet'),
+                    userInfo: {
+                        displayName: displayName
+                    }
+                };
+                api = new JitsiMeetExternalAPI(domain, options);
+
+                // Hide join buttons and show controls
+                document.getElementById('joinMeeting').style.display = 'none';
+                document.getElementById('controls').style.display = 'block';
+
+                // Start Timer
+                meetingStartTime = Date.now();
+                timerInterval = setInterval(updateMeetingTimer, 1000);
+
+                // Hide loading status
+                document.getElementById('status').innerText = "";
+            });
+
+            // End Call
+            document.getElementById('endCall').addEventListener('click', () => {
+                if (api) {
+                    api.dispose();
+                    api = null;
+                    clearInterval(timerInterval);
+                    alert("Call ended!");
+
+                    // Reset Timer
+                    document.getElementById('meetingTimer').innerText = "Time: 00:00";
+
+                    // Show join section and hide controls
+                    document.getElementById('joinMeeting').style.display = 'block';
+                    document.getElementById('controls').style.display = 'none';
+                }
+            });
+
+            // Update Meeting Timer
+            function updateMeetingTimer() {
+                const elapsed = Math.floor((Date.now() - meetingStartTime) / 1000);
+                const hours = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+                const minutes = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+                const seconds = String(elapsed % 60).padStart(2, '0');
+                document.getElementById('meetingTimer').innerText = `Time: ${hours}:${minutes}:${seconds}`;
+            }
+
+            document.getElementById('createRoomButton').addEventListener('click', () => {
+    // Generate a random room name
+    const roomName = `room-${Math.random().toString(36).substr(2, 8)}`;
+    const roomUrl = `https://meet.jit.si/${roomName}`;
+    
+    // Display the room URL for sharing
+    const roomLinkElement = document.getElementById('roomLink');
+    const roomUrlElement = document.getElementById('roomUrl');
+    roomUrlElement.textContent = roomUrl;
+    roomLinkElement.style.display = 'block';
+
+    // Open the Jitsi meeting in a new tab
+    window.open(roomUrl, '_blank');
+});
+
+// Logout
+document.getElementById('logoutLink').addEventListener('click', (event) => {
+                event.preventDefault();
+                alert("You have successfully logged out!");
+                window.location.href = "{{ url_for('logout') }}";
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,260 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #A3D9A5, #8B5E3C);
+    color: #fff;
+}
+
+header {
+    background: #4B8C44;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #F1E6C4;
+}
+
+header img {
+    max-width: 80px;
+    vertical-align: middle;
+}
+
+header h1 {
+    display: inline;
+    margin-left: 10px;
+    font-size: 24px;
+    color: #F1E6C4;
+}
+
+#joinMeeting {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+}
+
+#joinMeeting input, #joinMeeting button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+}
+
+#joinMeeting input {
+    width: calc(100% - 20px);
+}
+
+#joinMeeting button {
+    background-color: #4B8C44;
+    color: #fff;
+    cursor: pointer;
+}
+
+#joinMeeting button:hover {
+    background-color: #397A2C;
+}
+
+#controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+}
+
+#controls button {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4B8C44;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#controls button:hover {
+    background-color: #397A2C;
+}
+
+#meet {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+#status {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#loginForm {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    color: #fff;
+}
+
+#loginForm h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #F1E6C4;
+}
+
+#loginForm input {
+    padding: 12px;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    width: calc(100% - 20px);
+    background-color: #fff;
+    color: #333;
+}
+
+#loginForm input:focus {
+    outline: none;
+    border: 2px solid #4B8C44;
+}
+
+#loginForm button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4B8C44;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#loginForm button:hover {
+    background-color: #397A2C;
+}
+
+#signupLink {
+    margin-top: 15px;
+    color: #F1E6C4;
+}
+
+#signupLink a {
+    color: #F1E6C4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#signupLink a:hover {
+    text-decoration: underline;
+}
+
+/* Sign-Up Form Styles */
+#signupForm {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    color: #fff;
+}
+
+#signupForm h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #F1E6C4;
+}
+
+#signupForm input {
+    padding: 12px;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    width: calc(100% - 20px);
+    background-color: #fff;
+    color: #333;
+}
+
+#signupForm input:focus {
+    outline: none;
+    border: 2px solid #4B8C44;
+}
+
+#signupForm button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4B8C44;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#signupForm button:hover {
+    background-color: #397A2C;
+}
+
+#loginLink {
+    margin-top: 15px;
+    color: #F1E6C4;
+}
+
+#loginLink a {
+    color: #F1E6C4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#loginLink a:hover {
+    text-decoration: underline;
+}
+
+#createMeeting {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+}
+
+#createRoomButton {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4B8C44;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#createRoomButton:hover {
+    background-color: #397A2C;
+}
+
+#roomLink {
+    font-size: 16px;
+    color: #F1E6C4;
+    word-break: break-all;
+    text-align: center;
+}
